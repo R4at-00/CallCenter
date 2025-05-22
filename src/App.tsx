@@ -17,7 +17,7 @@ function App() {
   return(
   
       <AppProvider>
-        <div>
+        <div className='h-screen flex flex-col justify-center items-center'>
           {!loginOk && <LoginForm  handleLoginOk={handleLoginOk}/> }
           {loginOk && <Aplicacion />}
         </div>
