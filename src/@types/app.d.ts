@@ -5,8 +5,10 @@ export type usuarioType = | {
 
 export type AppContextType = {
     loginOk : boolean
-    user: usuarioType
+    usuario: usuarioType
+    updateUsuario: (u:TUsuario) => void;
+    updateNombre: (u:string) => void;
+    updateCorreo: (u:string) => void;
     updateLoginOk: (v: boolean) => void
-    updateUser: (u: usuarioType) => void
 }
 

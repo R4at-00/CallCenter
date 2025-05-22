@@ -4,14 +4,11 @@ import { useContext } from "react"
 
 export const Aplicacion = () =>{
 
-    const {user } = useContext(AppContext) as AppContextType
+    const { usuario } = useContext(AppContext) as AppContextType;
 
     return (
-        <div style={{display:"flex"}}>
-            
-            <p>El Usuario es : {user?.nombre}</p>
-            
-
+        <div>
+            <p>El Usuario {usuario?.nombre}, con el correo {usuario?.correo}.</p>
         </div>
     )
 }
