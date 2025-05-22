@@ -31,7 +31,7 @@ export const LoginForm = (props: IfLoginForm) =>{
     }
 
     return (
-        <div className="flex flex-col border border-black rounded-md p-6 w-fit gap-4">
+        <div className="flex flex-col border border-black rounded-md p-6 w-fit gap-4 shadow-xl">
             <h1 className="text-2xl">Formulario</h1>
             <Input className="w-100" placeholder="Nombre" name="Nombre" value={nombre} onChange={handleChangeNombre} />
             <Input className="w-100" placeholder="Correo" name="Correo" value={correo} onChange={handleChangeCorreo} />
