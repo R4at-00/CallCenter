@@ -16,9 +16,6 @@ const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     const updateNombre = (u: string) => {
         setUsuario((prev:any) => ({...prev, nombre: u }));
     }
-    const updateCorreo = (u: string) => {
-        setUsuario((prev:any) => ({...prev, correo: u }));
-    }
     const updateLoginOk = (v: boolean) => {
         setLoginOk(v)
     }
@@ -29,7 +26,6 @@ const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
                 usuario,
                 updateUsuario,
                 updateNombre,
-                updateCorreo,
                 updateLoginOk
             }}
         >

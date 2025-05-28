@@ -8,7 +8,7 @@ export const Aplicacion = () =>{
 
     return (
         <div>
-            <p>El Usuario {usuario?.nombre}, con el correo {usuario?.correo}.</p>
+            <p>El Usuario {usuario?.nombre}, con el correo {usuario?.password}.</p>
         </div>
     )
 }
