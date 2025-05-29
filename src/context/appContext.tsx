@@ -1,32 +1,48 @@
-
-import React, {  useState } from 'react';
-import type { AppContextType, usuarioType } from '../@types/app';
+import React, { useState } from 'react';
+import type { AppContextType, Tcentro, Tuser } from '../@types/app';
 
 export const AppContext = React.createContext<AppContextType | null>(null)
 
-
-const AppProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
-
-    const [loginOk, setLoginOk] = useState<boolean>(false);
-    const [usuario, setUsuario] = useState<usuarioType>(undefined);
-
-    const updateUsuario = (u: usuarioType) => {
+const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [usuario, setUsuario] = useState<Tuser>(undefined);
+    const [centrosUsuario, setCentrosUsuario] = useState<Tcentro[]>([]);
+    const [centros, setCentros] = useState<Tcentro[]>([]);
+    
+    const updateUsuario = (u: Tuser) => {
         setUsuario(u);
     }
-    const updateNombre = (u: string) => {
-        setUsuario((prev:any) => ({...prev, nombre: u }));
+    const updateCentrosUsuario = (u: Tcentro[]) => {
+        setCentrosUsuario(u);
     }
-    const updateLoginOk = (v: boolean) => {
-        setLoginOk(v)
+    const updateCentros = (u: Tcentro[]) => {
+        setCentros(u);
     }
     return (
-        <AppContext.Provider 
+        <AppContext.Provider
             value={{
-                loginOk,
                 usuario,
+                loginOk: false,
+                centros,
+                centrosUsuario,
+                tiposEstructura: [],
+                tiposDocumentacion: [],
+                periodicidades: [],
+                tiposFactura: [],
+                tiposEnvio: [],
+                numeroProcesos: 0,
+                numeroDocumentos: 0,
+
                 updateUsuario,
-                updateNombre,
-                updateLoginOk
+                updateLoginOk: () => { },
+                updateCentros,
+                updateCentrosUsuario,
+                updateTiposEstructura: () => { },
+                updateTiposDocumentacion: () => { },
+                updatePeriodicidades: () => { },
+                updateTiposFactura: () => { },
+                updateNumeroProcesos: () => { },
+                updateNumeroDocumentos: () => { },
+                updateTiposEnvio: () => { },
             }}
         >
             {children}

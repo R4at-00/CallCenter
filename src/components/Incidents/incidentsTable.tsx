@@ -1,9 +1,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -20,7 +18,7 @@ const registros = [
     prioridad: "Normal"
   },
   {
-    nRegistro: "12354",
+    nRegistro: "12355",
     NHC: "518177",
     fecha: "09/07/03",
     incidencia: "[usuario1234-09/07/03 9:01]: El paciente PASCAL RODRÍGUEZ, JAVIER ...",
@@ -29,7 +27,7 @@ const registros = [
     prioridad: "Normal"
   },
   {
-    nRegistro: "12354",
+    nRegistro: "12356",
     NHC: "518177",
     fecha: "09/07/03",
     incidencia: "[usuario1234-09/07/03 9:01]: El paciente PASCAL RODRÍGUEZ, JAVIER ...",
@@ -38,7 +36,7 @@ const registros = [
     prioridad: "Normal"
   },
   {
-    nRegistro: "12354",
+    nRegistro: "12357",
     NHC: "518177",
     fecha: "09/07/03",
     incidencia: "[usuario1234-09/07/03 9:01]: El paciente PASCAL RODRÍGUEZ, JAVIER ...",
@@ -68,7 +66,7 @@ export default function IncidentsTable() {
                 {registros.map((registro) => (
                     <TableRow key={registro.nRegistro}>
                         <TableCell className="font-medium">{registro.nRegistro}</TableCell>
-                        <TableCell >{registro.NHC}</TableCell>
+                        <TableCell>{registro.NHC}</TableCell>
                         <TableCell>{registro.fecha}</TableCell>
                         <TableCell className="text-left">{registro.incidencia}</TableCell>
                         <TableCell className="text-center">{registro.estado}</TableCell>

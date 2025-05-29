@@ -9,15 +9,15 @@ import Incidents from './components/Incidents/incidents'
 function App() {
   const [loginOk, setLoginOK] = useState(false)
 
-  const handleLoginOk = () => {
+  const handleClose = () => {
     setLoginOK(true)
   }
   
-  return(
+  return (
   
       <AppProvider>
         <div>
-          {!loginOk && <div className='h-screen flex flex-col justify-center items-center'><LoginForm  handleLoginOk={handleLoginOk}/> </div>}
+          {!loginOk && <div className='h-screen flex flex-col justify-center items-center'><LoginForm  handleClose={handleClose}/> </div>}
           {loginOk && <div className='h-screen flex flex-col justify-start items-center pt-10'><Incidents /></div>}
         </div>
       </AppProvider>
