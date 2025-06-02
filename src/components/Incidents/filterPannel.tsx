@@ -15,18 +15,15 @@ export default function FilterPannel() {
 
     return (
         <div className='flex flex-wrap gap-4 w-full'>
-            <DatePick name="Desde Fecha:" />
-            <DatePick name="Hasta Fecha:" />
+            <DatePick name="Desde Fecha" />
+            <DatePick name="Hasta Fecha" />
             <label className='flex items-center gap-2.5'>
-                <p>NHC:</p>
-                <Input type="email" />
+                <Input placeholder="NHC" type="email" />
             </label>
-            <div className='flex flex-col gap-2.5 border-2 p-3 rounded-sm'>
                 <label className="flex items-center gap-2.5">
-                    <p>Ver:</p>
                     <Select>
                         <SelectTrigger className="w-[240px]">
-                            <SelectValue placeholder="Selecciona una opción" />
+                            <SelectValue placeholder="Estado" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">Todas</SelectItem>
@@ -37,10 +34,9 @@ export default function FilterPannel() {
                     </Select>
                 </label>
                 <label className="flex items-center gap-2.5">
-                    <p>Resp.:</p>
                     <Select>
                         <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Selecciona una opción" />
+                            <SelectValue placeholder="Responsable" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
@@ -67,7 +63,6 @@ export default function FilterPannel() {
                     </Select>
 
                 </label>
-            </div>
         </div>
     )
 }

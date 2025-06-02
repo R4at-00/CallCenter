@@ -15,10 +15,13 @@ export default function Incidents(){
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
             {usuario?.admin && <NewIncident/>}
+            {/* <NewIncident/> */}
             <FilterPannel/>
             <IncidentsTable/>
-            <PendingIncidents name="Call Center" value={contadorCallCenter}/>
-            <PendingIncidents name="SJD" value={contadorSJD}/>
+            <div className=''>
+                <PendingIncidents name="Call Center" value={contadorCallCenter}/>
+                <PendingIncidents name="SJD" value={contadorSJD}/>
+            </div>
         </div>
     );
 }

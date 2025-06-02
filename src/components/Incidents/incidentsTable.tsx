@@ -49,9 +49,9 @@ const registros = [
 // En vez de la constante invoices, sería un contenedor de registros pasado por props
 export default function IncidentsTable() {
     return (
-        <Table>
+        <Table className='border-2'>
             {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-            <TableHeader>
+            <TableHeader className="bg-gray-100">
                 <TableRow>
                     <TableHead className="w-[100px]">Registro</TableHead>
                     <TableHead>NHC</TableHead>

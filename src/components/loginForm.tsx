@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 
 
 interface IfLoginForm {
-
     handleClose: () => void
 }
 
