@@ -96,12 +96,12 @@ export const LoginForm = (props: IfLoginForm) => {
         }
     }
     return (
-        <div className="flex flex-col border border-black rounded-md p-6 w-fit gap-4 shadow-xl">
-            <h1 className="text-2xl">Formulario</h1>
-            <Input className="w-100" placeholder="Usuario" name="Usuario" value={usuario} onChange={handleChangeNombreUsuario} />
-            <Input type="password" className="w-100" placeholder="Password" name="Password" value={password} onChange={handleChangePassword} />
-            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end" variant="outline">Enviar</Button>
-            {errorVisible && <div className="">{mensajeError}</div>}
+        <div className="flex flex-col text-gray-700 border border-gray-300 rounded-md p-9 w-fit gap-4 shadow-xl">
+            <h1 className="text-2xl m-4 mt-0 mb-1 pb-4 border-b-2">Formulario</h1>
+            <Input className="w-100 m-3 mt-1 mb-0.5" placeholder="Usuario" name="Usuario" value={usuario} onChange={handleChangeNombreUsuario} />
+            <Input type="password" className="w-100 m-3 mt-0.5" placeholder="Password" name="Password" value={password} onChange={handleChangePassword} />
+            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end p-5 m-3 mt-0.5 mb-1" variant="outline">Enviar</Button>
+            {errorVisible && <div className="m-4 mt-1 mb-1">{mensajeError}</div>}
         </div>
     );
 }
