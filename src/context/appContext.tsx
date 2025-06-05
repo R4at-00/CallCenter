@@ -9,11 +9,19 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const updateUsuario = (u: Tuser) => {
         setUsuario(u);
     }
+
+    const [usuarioNick, setUsuarioNick] = useState<string>(undefined);
+    
+    const updateUsuarioNick = (u: string) => {
+        setUsuarioNick(u);
+    }
     return (
         <AppContext.Provider
             value={{
                 usuario,
+                usuarioNick,
                 updateUsuario,
+                updateUsuarioNick
             }}
         >
             {children}
