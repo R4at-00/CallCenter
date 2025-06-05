@@ -31,6 +31,16 @@ export type DatosUsuarioAD = {
 	token: string;
 };
 
+export type incidencia = {
+    nRegistro: string;
+    NHC: string;
+    fecha: string;
+    incidencia: string;
+    estado: string;
+    responsable: string;
+    prioridad: string;
+}
+
 export type Tcentro = {
 	FACILITY: number;
 	XKEY: string;

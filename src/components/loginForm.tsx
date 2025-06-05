@@ -11,7 +11,7 @@ interface IfLoginForm {
 
 export const LoginForm = (props: IfLoginForm) => {
 
-    const { updateUsuario } = useContext(AppContext) as AppContextType
+    const { updateUsuario, updateUsuarioNick } = useContext(AppContext) as AppContextType
 
     const [usuario, setUsuario] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -35,6 +35,8 @@ export const LoginForm = (props: IfLoginForm) => {
         //Preparar petición
         setValidating(true);
         setErrorVisible(false);
+
+        updateUsuarioNick(usuario);
 
         const postData = {
             username: usuario,
@@ -97,10 +99,10 @@ export const LoginForm = (props: IfLoginForm) => {
     }
     return (
         <div className="flex flex-col text-gray-700 border border-gray-300 rounded-md p-9 w-fit gap-4 shadow-xl">
-            <h1 className="text-2xl m-4 mt-0 mb-1 pb-4 border-b-2">Formulario</h1>
+            <h1 className="text-2xl m-4 mt-0 mb-1 pb-4 border-b-2">Call Center</h1>
             <Input className="w-100 m-3 mt-1 mb-0.5" placeholder="Usuario" name="Usuario" value={usuario} onChange={handleChangeNombreUsuario} />
             <Input type="password" className="w-100 m-3 mt-0.5" placeholder="Password" name="Password" value={password} onChange={handleChangePassword} />
-            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end p-5 m-3 mt-0.5 mb-1" variant="outline">Enviar</Button>
+            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end p-5 m-3 mt-0.5 mb-1" variant="outline">Acceder</Button>
             {errorVisible && <div className="m-4 mt-1 mb-1">{mensajeError}</div>}
         </div>
     );

@@ -10,11 +10,12 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         setUsuario(u);
     }
 
-    const [usuarioNick, setUsuarioNick] = useState<string>(undefined);
+    const [usuarioNick, setUsuarioNick] = useState<string>('');
     
     const updateUsuarioNick = (u: string) => {
         setUsuarioNick(u);
     }
+    
     return (
         <AppContext.Provider
             value={{

@@ -29,8 +29,18 @@ import { AppContext } from '@/context/appContext';
 export default function NewIncident() {
     const [isAsignarNHCActive, setIsAsignarNHCActive] = useState(false);
     // const $asignarNHC: HTMLInputElement = document.getElementById('asignar-NHC') as HTMLInputElement;
-    const { usuario } = useContext(AppContext) as AppContextType
-    const generarEncabezadoIncidencia = `[${usuario?.nombre}-${Date.now().toString()}]:`
+    const { usuarioNick } = useContext(AppContext) as AppContextType
+    const generarEncabezadoIncidencia = `[${usuarioNick}-${obtenerFechaHoraActual()}]:`
+
+    function obtenerFechaHoraActual(): string {
+        const ahora = new Date();
+        const dia = String(ahora.getDate()).padStart(2, '0');
+        const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+        const anio = ahora.getFullYear();
+        const horas = ahora.getHours();
+        const minutos = String(ahora.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${anio} ${horas}:${minutos}`;
+    }
 
     return (
         <Dialog>
@@ -130,19 +140,19 @@ export default function NewIncident() {
                         </div>
                         <div className='w-full flex flex-col gap-4'>
                             <div id="paciente-NHC" className='flex flex-col gap-4  border-1 border-gray-200 rounded-2xl p-4'>
-                                <RadioGroup className='flex gap-6' defaultValue="option-one">
+                                <RadioGroup className='flex gap-6' defaultValue="paciente-sin-NHC">
                                     <div className="flex gap-2 items-center">
                                         <Label className='m-0' htmlFor="paciente-sin-NHC">Paciente sin número de historia</Label>
-                                        <RadioGroupItem onClick={() => setIsAsignarNHCActive(true)} defaultChecked value="paciente-sin-NHC" id="paciente-sin-NHC" />
+                                        <RadioGroupItem onClick={() => setIsAsignarNHCActive(true)}  value="paciente-sin-NHC" id="paciente-sin-NHC" />
                                     </div>
                                     <div className="flex gap-2 items-center space-x-2">
                                         <Label className='m-0' htmlFor="paciente-con-NHC">Paciente con número de historia</Label>
                                         <RadioGroupItem onClick={() => setIsAsignarNHCActive(false)} value="paciente-con-NHC" id="paciente-con-NHC" />
                                     </div>
                                 </RadioGroup>
-                                <Input disabled={isAsignarNHCActive} id="asignar-NHC" placeholder='NHC' className='w-fit' />
+                                <Input maxLength={6} disabled={isAsignarNHCActive} id="asignar-NHC" placeholder='NHC' className='w-fit' />
                             </div>
-                            <Textarea defaultValue={generarEncabezadoIncidencia} className='h-full shadow-lg'/>
+                            <Textarea defaultValue={generarEncabezadoIncidencia} className='h-full shadow-lg' />
                         </div>
                     </div>
                     <DialogFooter>

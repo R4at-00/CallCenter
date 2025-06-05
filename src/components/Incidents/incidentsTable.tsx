@@ -1,3 +1,4 @@
+import type { incidencia } from "@/@types/app";
 import {
   Table,
   TableBody,
@@ -6,8 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
- 
-const registros = [
+
+const registros: incidencia[] = [
   {
     nRegistro: "12354",
     NHC: "518177",
@@ -21,7 +22,7 @@ const registros = [
     nRegistro: "12355",
     NHC: "518177",
     fecha: "09/07/03",
-    incidencia: "[usuario1234-09/07/03 9:01]: El paciente PASCAL RODRÍGUEZ, JAVIER ...",
+    incidencia: "[usuario1234-09/07/03 9:01]: El paciente PASCAL RODRÍGUEZ, JAVIER ...RODRÍGUEZ, JAVIER ...RODRÍGUEZ, JAVIER ...",
     estado: "C",
     responsable: "CONSULTAS EXTERNAS",
     prioridad: "Normal"
@@ -68,7 +69,7 @@ export default function IncidentsTable() {
                         <TableCell className="font-medium">{registro.nRegistro}</TableCell>
                         <TableCell>{registro.NHC}</TableCell>
                         <TableCell>{registro.fecha}</TableCell>
-                        <TableCell className="text-left">{registro.incidencia}</TableCell>
+                        <TableCell className="text-left max-w-2xs overflow-x-hidden">{registro.incidencia}</TableCell>
                         <TableCell className="text-center">{registro.estado}</TableCell>
                         <TableCell className="text-right">{registro.responsable}</TableCell>
                         <TableCell className="text-right">{registro.prioridad}</TableCell>
