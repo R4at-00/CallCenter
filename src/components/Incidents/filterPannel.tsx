@@ -26,7 +26,7 @@ export default function FilterPannel() {
                             <SelectValue placeholder="Estado" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">Todas</SelectItem>
+                            <SelectItem defaultChecked value="all">Todas</SelectItem>
                             <SelectItem value="callcenter">Pendiente procesar por Call Center</SelectItem>
                             <SelectItem value="sjd">Pendiente procesar por SJD</SelectItem>
                             <SelectItem value="solved">Resueltas</SelectItem>
@@ -41,7 +41,7 @@ export default function FilterPannel() {
                         <SelectContent>
                             <SelectGroup>
                                 <SelectLabel>Encargado</SelectLabel>
-                                <SelectItem value="all">Todos</SelectItem>
+                                <SelectItem defaultChecked value="all">Todos</SelectItem>
                                 <SelectItem value="AGENDAS">AGENDAS</SelectItem>
                                 <SelectItem value="CAR-DIG">CAR-DIG</SelectItem>
                                 <SelectItem value="CARDIOLOGÍA INTERV.">CARDIOLOGÍA INTERV.</SelectItem>

@@ -9,27 +9,9 @@ export type Tuser =
 
 export type AppContextType = {
 	usuario: Tuser;
-	loginOk: boolean;
-	centros: Tcentro[];
-	centrosUsuario: Tcentro[];
-	tiposEstructura: TSidDesc[];
-	tiposDocumentacion: TSidDesc[];
-	periodicidades: TSidDesc[];
-	tiposFactura: TSidDesc[];
-	tiposEnvio: TEnvio[];
-	numeroProcesos: number;
-	numeroDocumentos: number;
+	usuarioNick: string;
 	updateUsuario: (u: Tuser) => void;
-	updateLoginOk: (v: boolean) => void;
-	updateCentros: (c: Tcentro[]) => void;
-	updateCentrosUsuario: (c: Tcentro[]) => void;
-	updateTiposEstructura: (e: TSidDesc[]) => void;
-	updateTiposDocumentacion: (e: TSidDesc[]) => void;
-	updatePeriodicidades: (e: TSidDesc[]) => void;
-	updateTiposFactura: (f: TSidDesc[]) => void;
-	updateNumeroProcesos: (n: number) => void;
-	updateNumeroDocumentos: (n: number) => void;
-	updateTiposEnvio: (e: TEnvio[]) => void;
+	updateUsuarioNick: (u: string) => void;
 };
 
 export type DatosUsuarioAD = {
