@@ -79,7 +79,7 @@ export const LoginForm = (props: IfLoginForm) => {
             setValidating(false)
         } else {
             //Comprobar grupos
-            console.log(JSON.stringify(datosUsuario))
+            // console.log(JSON.stringify(datosUsuario))
             localStorage.setItem("tokenFace", datosUsuario.token);
 
             const user: Tuser = {

@@ -10,8 +10,11 @@ export type Tuser =
 export type AppContextType = {
 	usuario: Tuser;
 	usuarioNick: string;
+	incidencias: incidencia[];
 	updateUsuario: (u: Tuser) => void;
 	updateUsuarioNick: (u: string) => void;
+	updateIncidencias: (u: incidencia[]) => void;
+	handleNewIncidencia: (u: incidencia) => void;
 };
 
 export type DatosUsuarioAD = {
@@ -20,7 +23,6 @@ export type DatosUsuarioAD = {
 		displayName: string;
 		userPrincipalName: string;
 	};
-
 	grupos: [
 		{
 			grupo: string;
@@ -32,7 +34,7 @@ export type DatosUsuarioAD = {
 };
 
 export type incidencia = {
-    nRegistro: string;
+    id: string;
     NHC: string;
     fecha: string;
     incidencia: string;
