@@ -43,7 +43,7 @@ export type incidencia = {
     Prioridad: string;
 }
 
-export type incidencia = {
+export type nuevaIncidencia = {
     NHC: string;
     Fecha: string;
     Incidencia: string;
