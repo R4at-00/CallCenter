@@ -14,8 +14,8 @@ export default function Incidents(){
     
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
-            {usuario?.admin && <NewIncident/>}
-            {/* <NewIncident/> */}
+            {/* {usuario?.admin && <NewIncident/>} */}
+            <NewIncident/>
             <FilterPannel/>
             <IncidentsTable/>
             <div className=''>

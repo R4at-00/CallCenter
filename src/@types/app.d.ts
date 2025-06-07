@@ -36,11 +36,20 @@ export type DatosUsuarioAD = {
 export type incidencia = {
     id: string;
     NHC: string;
-    fecha: string;
-    incidencia: string;
-    estado: string;
-    responsable: string;
-    prioridad: string;
+    Fecha: string;
+    Incidencia: string;
+    Estado: string;
+    Responsable: string;
+    Prioridad: string;
+}
+
+export type incidencia = {
+    NHC: string;
+    Fecha: string;
+    Incidencia: string;
+    Estado: string;
+    Responsable: string;
+    Prioridad: string;
 }
 
 export type Tcentro = {

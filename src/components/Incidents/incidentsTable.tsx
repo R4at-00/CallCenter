@@ -22,16 +22,20 @@ export default function IncidentsTable() {
     
   }, [incidencias])
 
+  const formatDate = (fecha: string) => {
+    return fecha.split('T')[0];
+  }
+
   return (
     <Table className='border-2'>
       <TableHeader className="bg-gray-100">
         <TableRow>
-          <TableHead className="w-[100px]">Registro</TableHead>
+          <TableHead className="w-fit">Registro</TableHead>
           <TableHead>NHC</TableHead>
           <TableHead>Fecha</TableHead>
-          <TableHead className="text-left">Incidencia</TableHead>
+          <TableHead className="text-left w-fit">Incidencia</TableHead>
           <TableHead className="text-center">Estado</TableHead>
-          <TableHead className="text-right">Responsable</TableHead>
+          <TableHead className="text-left pl-6">Responsable</TableHead>
           <TableHead className="text-right">Prioridad</TableHead>
         </TableRow>
       </TableHeader>
@@ -39,12 +43,12 @@ export default function IncidentsTable() {
         {incidencias.map((registro) => (
           <TableRow key={registro.id}>
             <TableCell className="font-medium">{registro.id}</TableCell>
-            <TableCell>{registro.NHC}</TableCell>
-            <TableCell>{registro.fecha}</TableCell>
-            <TableCell className="text-left max-w-2xs overflow-x-hidden">{registro.incidencia}</TableCell>
-            <TableCell className="text-center">{registro.estado}</TableCell>
-            <TableCell className="text-right">{registro.responsable}</TableCell>
-            <TableCell className="text-right">{registro.prioridad}</TableCell>
+            <TableCell >{registro.NHC}</TableCell>
+            <TableCell>{formatDate(registro.Fecha)}</TableCell>
+            <TableCell className="text-left max-w-2xs overflow-x-hidden">{registro.Incidencia}</TableCell>
+            <TableCell className="text-center">{registro.Estado}</TableCell>
+            <TableCell className="text-left pl-6">{registro.Responsable}</TableCell>
+            <TableCell className="text-right">{registro.Prioridad}</TableCell>
           </TableRow>
         ))}
       </TableBody>

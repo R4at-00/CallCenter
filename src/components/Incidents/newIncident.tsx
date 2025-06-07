@@ -32,6 +32,8 @@ export default function NewIncident() {
     const { usuarioNick } = useContext(AppContext) as AppContextType
     const generarEncabezadoIncidencia = `[${usuarioNick}-${obtenerFechaHoraActual()}]:`
 
+
+
     function obtenerFechaHoraActual(): string {
         const ahora = new Date();
         const dia = String(ahora.getDate()).padStart(2, '0');
@@ -46,7 +48,7 @@ export default function NewIncident() {
         <Dialog>
             <form>
                 <DialogTrigger className='p-4 text-s' asChild>
-                    <Button variant="outline">Nueva Incidencia</Button>
+                    <Button onClick={() => setIsAsignarNHCActive(false)} variant="outline">Nueva Incidencia</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[800px] p-8">
                     <DialogHeader>
@@ -56,7 +58,7 @@ export default function NewIncident() {
                         <div className="grid gap-6 w-fit grow-1 pr-6 border-r-2 border-gray-100">
                             <div className="grid gap-3">
                                 <Label htmlFor="estado" >Estado de la incidencia</Label>
-                                <Select>
+                                <Select required>
                                     <SelectTrigger id="estado" className="w-fit">
                                         <SelectValue placeholder="Estado" />
                                     </SelectTrigger>
@@ -71,7 +73,7 @@ export default function NewIncident() {
                             </div>
                             <div className="grid gap-3">
                                 <Label htmlFor="clasificacion">Clasificación</Label>
-                                <Select>
+                                <Select required>
                                     <SelectTrigger id="clasificacion" className="w-fit">
                                         <SelectValue placeholder="Clasificación" />
                                     </SelectTrigger>
@@ -93,7 +95,7 @@ export default function NewIncident() {
                             </div>
                             <div className="grid gap-3">
                                 <Label htmlFor="responsable">Responsable</Label>
-                                <Select>
+                                <Select required>
                                     <SelectTrigger id='responsable' className="w-fit">
                                         <SelectValue placeholder="Responsable" />
                                     </SelectTrigger>
@@ -122,7 +124,7 @@ export default function NewIncident() {
                             </div>
                             <div className="grid gap-3">
                                 <Label htmlFor="prioridad" >Prioridad</Label>
-                                <Select>
+                                <Select required>
                                     <SelectTrigger id="prioridad" className="w-fit">
                                         <SelectValue placeholder="Prioridad" />
                                     </SelectTrigger>
@@ -150,7 +152,7 @@ export default function NewIncident() {
                                         <RadioGroupItem onClick={() => setIsAsignarNHCActive(false)} value="paciente-con-NHC" id="paciente-con-NHC" />
                                     </div>
                                 </RadioGroup>
-                                <Input maxLength={6} disabled={isAsignarNHCActive} id="asignar-NHC" placeholder='NHC' className='w-fit' />
+                                <Input required maxLength={6} pattern='[0-9]*' disabled={isAsignarNHCActive} id="asignar-NHC" placeholder='NHC' className='w-fit' />
                             </div>
                             <Textarea defaultValue={generarEncabezadoIncidencia} className='h-full shadow-lg' />
                         </div>
