@@ -16,7 +16,7 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
     const updateIncidencias = (newArrayIncidencias: incidencia[]) => {
         setIncidencias(newArrayIncidencias);
-        console.log(incidencias)
+        // console.log(incidencias)
     }
 
     const handleNewIncidencia = (newIncidencia : incidencia): void => {

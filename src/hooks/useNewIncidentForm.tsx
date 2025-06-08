@@ -1,16 +1,27 @@
-import { useReducer } from "react"
-import type {nuevaIncidencia} from '@/@types/app'
+import { useContext, useReducer } from "react"
+import type { AppContextType, nuevaIncidencia } from '@/@types/app'
+import { AppContext } from "@/context/appContext";
 interface FormState {
     inputValues: nuevaIncidencia
 }
 
+function obtenerFechaHoraActual(): string {
+    const ahora = new Date();
+    const dia = String(ahora.getDate()).padStart(2, '0');
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+    const anio = ahora.getFullYear();
+    const horas = ahora.getHours();
+    const minutos = String(ahora.getMinutes()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
+}
 const INITIAL_STATE = {
     NHC: '',
-    Fecha: '',
+    Fecha: obtenerFechaHoraActual(),
     Incidencia: '',
     Estado: '',
     Responsable: '',
-    Prioridad: ''
+    Prioridad: '',
+    Clasificacion: ''
 }
 
 type FormReducerAction = {
@@ -23,16 +34,16 @@ type FormReducerAction = {
     type: "clear"
 }
 
-const formReducer = (state:FormState["inputValues"], action: FormReducerAction) => {
-    switch(action.type){
+const formReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
+    switch (action.type) {
         case "change_value":
-            const {inputName, inputValue} = action.payload;
+            const { inputName, inputValue } = action.payload;
             return {
                 ...state,
                 [inputName]: inputValue
             }
-            case "clear":
-                return INITIAL_STATE;
+        case "clear":
+            return INITIAL_STATE;
     }
 }
 

@@ -41,6 +41,7 @@ export type incidencia = {
     Estado: string;
     Responsable: string;
     Prioridad: string;
+	Clasificacion: string;
 }
 
 export type nuevaIncidencia = {
@@ -50,6 +51,7 @@ export type nuevaIncidencia = {
     Estado: string;
     Responsable: string;
     Prioridad: string;
+	Clasificacion: string;
 }
 
 export type Tcentro = {
