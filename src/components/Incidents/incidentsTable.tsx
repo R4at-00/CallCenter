@@ -11,16 +11,16 @@ import { AppContext } from "@/context/appContext";
 import { useContext, useEffect } from "react";
 
 export default function IncidentsTable() {
-
   const { updateIncidencias, incidencias } = useContext(AppContext) as AppContextType
+  async function fetchIncidencias(): Promise<Array<incidencia>>{
+    return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+  }
   useEffect(() => {
-    const fetchIncidencias = (): Promise<Array<incidencia>> => {
-      return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
-    }
     fetchIncidencias()
       .then(updateIncidencias)
-    
-  }, [incidencias])
+    const controller = new AbortController()
+    return () => { controller.abort() }
+  }, []);
 
   const formatDate = (fecha: string) => {
     return fecha.split('T')[0];

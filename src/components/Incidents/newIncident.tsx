@@ -29,7 +29,7 @@ import { DialogDescription } from '@radix-ui/react-dialog';
 
 export default function NewIncident() {
     const [isAsignarNHCActive, setIsAsignarNHCActive] = useState(false);
-    const { usuarioNick, handleNewIncidencia, incidencias } = useContext(AppContext) as AppContextType
+    const { usuarioNick, handleNewIncidencia, incidencias, updateIncidencias } = useContext(AppContext) as AppContextType
     // const generarEncabezadoIncidencia = 
     const [inputValues, dispatch] = useNewIncidentForm();
 
@@ -199,7 +199,7 @@ export default function NewIncident() {
                         </div>
                         <div className='w-full flex flex-col gap-4'>
                             <div id="paciente-NHC" className='flex flex-col gap-4  border-1 border-gray-200 rounded-2xl p-4'>
-                                <RadioGroup className='flex gap-6' defaultValue="paciente-sin-NHC">
+                                <RadioGroup className='flex gap-6' defaultValue="paciente-con-NHC">
                                     <div className="flex gap-2 items-center">
                                         <Label className='m-0' htmlFor="paciente-sin-NHC">Paciente sin número de historia</Label>
                                         <RadioGroupItem onClick={() => setIsAsignarNHCActive(true)} value="paciente-sin-NHC" id="paciente-sin-NHC" />
@@ -228,7 +228,7 @@ export default function NewIncident() {
                         <DialogClose asChild>
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button onClick={ async (event) => {
+                        <Button onClick={async (event) => {
 
                             event.preventDefault();
                             try {
@@ -244,6 +244,14 @@ export default function NewIncident() {
                             } catch (err) {
                                 console.error(err);
                             }
+
+                            async function fetchIncidencias(): Promise<Array<incidencia>> {
+                                return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+                            }
+                            fetchIncidencias()
+                                .then(updateIncidencias)
+                            const controller = new AbortController()
+                            return () => { controller.abort() }
                         }} type="submit">Guardar</Button>
                     </DialogFooter>
                 </DialogContent>

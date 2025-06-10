@@ -10,8 +10,6 @@ function obtenerFechaHoraActual(): string {
     const dia = String(ahora.getDate()).padStart(2, '0');
     const mes = String(ahora.getMonth() + 1).padStart(2, '0');
     const anio = ahora.getFullYear();
-    const horas = ahora.getHours();
-    const minutos = String(ahora.getMinutes()).padStart(2, '0');
     return `${anio}-${mes}-${dia}`;
 }
 const INITIAL_STATE = {

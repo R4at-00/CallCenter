@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
@@ -12,38 +12,43 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import type { AppContextType, incidencia } from "@/@types/app";
+import { AppContext } from "@/context/appContext";
 
 interface DatePickProps {
-  name: string
+  name: string,
+  fecha: Date,
+  setFecha: React.Dispatch<React.SetStateAction<Date | undefined>>
 }
 
-export default function DatePickerDemo(props: DatePickProps) {
-  const [date, setDate] = useState<Date>();
-
+export default function DatePick(props: DatePickProps) {
+  // const [incidenciasCompletas, setIncidenciasCompletas] = useState<Array<incidencia>>([]);
+  // const { updateIncidencias } = useContext(AppContext) as AppContextType;
+  
   return (
-    <label className="flex items-center gap-2.5">  
-        <Popover>
+    <label className="flex items-center gap-2.5">
+      <Popover>
         <PopoverTrigger asChild>
-            <Button
+          <Button
             variant="outline"
             className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !date && "text-muted-foreground"
+              "w-[240px] justify-start text-left font-normal",
+              !props.fecha && "text-muted-foreground"
             )}
-            >
+          >
             <CalendarIcon />
-            {date ? format(date, "PPP") : <span>{props.name}</span>}
-            </Button>
+            {props.fecha ? format(props.fecha, "PPP") : <span>{props.name}</span>}
+          </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
+          <Calendar
             mode="single"
-            selected={date}
-            onSelect={setDate}
+            selected={props.fecha}
+            onSelect={props.setFecha}
             initialFocus
-            />
+          />
         </PopoverContent>
-        </Popover>
+      </Popover>
     </label>
   );
 }
