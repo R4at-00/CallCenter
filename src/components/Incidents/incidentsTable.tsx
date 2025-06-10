@@ -12,7 +12,7 @@ import { useContext, useEffect } from "react";
 
 export default function IncidentsTable() {
   const { updateIncidencias, incidencias } = useContext(AppContext) as AppContextType
-  async function fetchIncidencias(): Promise<Array<incidencia>>{
+  async function fetchIncidencias(): Promise<Array<incidencia>> {
     return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
   }
   useEffect(() => {

@@ -17,144 +17,35 @@ import { Button } from "../ui/button";
 
 export default function FilterPannel() {
 
-    const [NHC, setNHC] = useState<string>();
-    const [estado, setEstado] = useState<string>();
-    const [responsable, setResponsable] = useState<string>();
-    const [incidenciasCompletas, setIncidenciasCompletas] = useState<Array<incidencia>>([]);
+    const { updateIncidencias } = useContext(AppContext) as AppContextType;
+    const [NHC, setNHC] = useState<string>('');
+    const [estado, setEstado] = useState<string>('all');
+    const [responsable, setResponsable] = useState<string>('all');
     const [desdeFecha, setDesdeFecha] = useState<Date>();
     const [hastaFecha, setHastaFecha] = useState<Date>();
-    const { updateIncidencias } = useContext(AppContext) as AppContextType;
 
     const fetchIncidencias = async (): Promise<Array<incidencia>> => {
-        return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+        return await fetch('http://localhost:3000/api/incidencias').then(res => res.json());
     }
-    useEffect(() => {
-        filtrar()
-    }, []);
 
-    const filtrar = async () => {
-        await fetchIncidencias()
-            .then(setIncidenciasCompletas)
-        if (NHC !== undefined) {
-            updateIncidencias(
-                incidenciasCompletas.filter((incidencia) => {
-                    if (incidencia.NHC === NHC || NHC == "") {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-            )
-        }
-        if (estado !== undefined) {
-            updateIncidencias(
-                incidenciasCompletas.filter((incidencia) => {
-                    if (incidencia.Estado === estado || estado === 'all') {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-            )
-        }
-        if (responsable !== undefined) {
-            updateIncidencias(
-                incidenciasCompletas.filter((incidencia) => {
-                    if (incidencia.Responsable === responsable || responsable === 'all') {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-            )
-        }
-        if (desdeFecha !== undefined) {
-            updateIncidencias(
-                incidenciasCompletas.filter((incidencia) => {
-                    const fechaIncidencia = new Date(incidencia.Fecha);
-                    if (fechaIncidencia.getTime() > desdeFecha.getTime()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-            )
-        }
-        if (hastaFecha !== undefined) {
-            updateIncidencias(
-                incidenciasCompletas.filter((incidencia) => {
-                    const fechaIncidencia = new Date(incidencia.Fecha);
-                    if (fechaIncidencia.getTime() < hastaFecha.getTime()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
+    const filtrar = (arrayIncidencias: incidencia[]): incidencia[] => {
+        return arrayIncidencias.filter(incidencia => {
+            const fechaIncidencia = new Date(incidencia.Fecha);
 
-            );
+            if (NHC !== "" && incidencia.NHC !== NHC) return false;
+            if (estado !== "all" && incidencia.Estado !== estado) return false;
+            if (responsable !== "all" && incidencia.Responsable !== responsable) return false;
+            if (desdeFecha && fechaIncidencia.getTime() < desdeFecha.getTime()) return false;
+            if (hastaFecha && fechaIncidencia.getTime() > hastaFecha.getTime()) return false;
 
-        }
-
-        const controller = new AbortController()
-        return () => { controller.abort() }
+            return true;
+        })
     }
-    // useEffect(() => {
-
-    //     if (NHC !== undefined) {
-    //         updateIncidencias(
-    //             incidenciasCompletas.filter((incidencia) => {
-    //                 if (incidencia.NHC === NHC || NHC == "") {
-    //                     return true;
-    //                 } else {
-    //                     return false;
-    //                 }
-    //             })
-    //         )
-    //     } else {
-    //         updateIncidencias(
-    //             incidenciasCompletas
-    //         )
-    //     }
-    //     const controller = new AbortController()
-    //     return () => { controller.abort() }
-    // }, [NHC]);
-
-    // useEffect(() => {
-    //     fetchIncidencias()
-    //     .then(setIncidenciasCompletas)
-    //     if (estado !== undefined) {
-    //         updateIncidencias(
-    //             incidenciasCompletas.filter((incidencia) => {
-    //                 if (incidencia.Estado === estado || estado === 'all') {
-    //                     return true;
-    //                 } else {
-    //                     return false;
-    //                 }
-    //             })
-    //         )
-    //     }
-    // }, [estado]);
-
-    // useEffect(() => {
-    //     fetchIncidencias()
-    //     .then(setIncidenciasCompletas)
-    //     if (responsable !== undefined) {
-    //         updateIncidencias(
-    //             incidenciasCompletas.filter((incidencia) => {
-    //                 if (incidencia.Responsable === responsable || responsable === 'all') {
-    //                     return true;
-    //                 } else {
-    //                     return false;
-    //                 }
-    //             })
-    //         )
-    //     }
-    // }, [responsable]);
 
     return (
         <div className='flex flex-wrap gap-4 w-full'>
-            <DatePick name="Desde Fecha" fecha={desdeFecha as Date} setFecha={setDesdeFecha}/>
-            <DatePick name="Hasta Fecha" fecha={hastaFecha as Date} setFecha={setHastaFecha}/>
+            <DatePick name="Desde Fecha" fecha={desdeFecha as Date} setFecha={setDesdeFecha} />
+            <DatePick name="Hasta Fecha" fecha={hastaFecha as Date} setFecha={setHastaFecha} />
             <label className='flex items-center gap-2.5'>
                 <Input onChange={(evt) => setNHC(evt.target.value)} value={NHC} placeholder="NHC" type="email" />
             </label>
@@ -210,7 +101,10 @@ export default function FilterPannel() {
                     </SelectContent>
                 </Select>
             </label>
-            <Button onClick={filtrar}>Buscar</Button>
+            <Button onClick={async() => {
+                const nuevasInc = await fetchIncidencias()
+                updateIncidencias(filtrar(nuevasInc))
+            }}>Buscar</Button>
         </div>
     )
 }

@@ -15,6 +15,8 @@ export const LoginForm = (props: IfLoginForm) => {
 
     const [usuario, setUsuario] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+
+    //  Estados para autenticar usuario 
     //  Variable de estado que avisa cuándo se está realizando el proceso de validación.
     const [validating, setValidating] = useState<boolean>(false)
     //  Se deduce que es una variable de estado que controla si se muestra un elemento por pantalla.

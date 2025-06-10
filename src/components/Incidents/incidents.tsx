@@ -1,4 +1,4 @@
-import React, {useContext, useState/*, useContext, createContext*/} from 'react';
+import React, {useContext, useEffect, useState/*, useContext, createContext*/} from 'react';
 import FilterPannel from './filterPannel';
 import IncidentsTable from './incidentsTable';
 import PendingIncidents from './pendingIncidents';
@@ -8,10 +8,15 @@ import { AppContext } from '@/context/appContext';
 import type { AppContextType } from '@/@types/app';
 
 export default function Incidents(){
-    const {usuario} = useContext(AppContext) as AppContextType;
-    const [contadorCallCenter/*, setCCC*/] = useState(0);
-    const [contadorSJD/*, setContadorSJD*/] = useState(0);
+    const {usuario, incidencias} = useContext(AppContext) as AppContextType;
+    const [contadorCallCenter, setCCC] = useState(incidencias.filter(incidencia => incidencia.Estado === "C").length);
+    const [contadorSJD, setContadorSJD] = useState(incidencias.filter(incidencia => incidencia.Estado === "H").length);
     
+    useEffect(() => {
+        setCCC(incidencias.filter(incidencia => incidencia.Estado === "C").length)
+        setContadorSJD(incidencias.filter(incidencia => incidencia.Estado === "H").length)
+    }, [incidencias]);
+
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
             {/* {usuario?.admin && <NewIncident/>} */}

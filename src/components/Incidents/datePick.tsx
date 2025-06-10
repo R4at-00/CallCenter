@@ -18,7 +18,7 @@ import { AppContext } from "@/context/appContext";
 interface DatePickProps {
   name: string,
   fecha: Date,
-  setFecha: React.Dispatch<React.SetStateAction<Date | undefined>>
+  setFecha: React.Dispatch<React.SetStateAction<Date |undefined>>
 }
 
 export default function DatePick(props: DatePickProps) {
