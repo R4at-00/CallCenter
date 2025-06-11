@@ -14,7 +14,6 @@ export type AppContextType = {
 	updateUsuario: (u: Tuser) => void;
 	updateUsuarioNick: (u: string) => void;
 	updateIncidencias: (u: incidencia[]) => void;
-	handleNewIncidencia: (u: incidencia) => void;
 };
 
 export type DatosUsuarioAD = {
@@ -41,18 +40,11 @@ export type incidencia = {
     Estado: string;
     Responsable: string;
     Prioridad: string;
-	Clasificacion: string;
-}
+    Clasificacion: string;
+};
 
-export type nuevaIncidencia = {
-    NHC: string;
-    Fecha: string;
-    Incidencia: string;
-    Estado: string;
-    Responsable: string;
-    Prioridad: string;
-	Clasificacion: string;
-}
+export type nuevaIncidencia = Omit<incidencia, 'id'>;
+
 
 export type Tcentro = {
 	FACILITY: number;

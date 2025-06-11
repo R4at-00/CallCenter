@@ -19,14 +19,20 @@ export default function Incidents(){
 
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
-            {/* {usuario?.admin && <NewIncident/>} */}
-            <NewIncident/>
+            <div className='flex justify-between items-center w-full mb-5 border-0 border-gray-200 p-6 rounded-2xl shadow-xs hover:shadow-md transition-shadow'>
+                {/* {usuario?.admin && <NewIncident/>} */}
+                <h1 className='text-2xl'>Call Center</h1>
+                <NewIncident/>
+            </div>
+            <div className='border-0 p-5 border-gray-100 rounded-xl mb-4 shadow-s hover:shadow-md transition-shadow'>
+                <h1 className='border-b-1 border-gray-200 pb-1 mb-2'>Incidencias pendientes</h1>
+                <div className='flex gap-5'>
+                    <PendingIncidents name="Call Center" value={contadorCallCenter}/>
+                    <PendingIncidents name="SJD" value={contadorSJD}/>
+                </div>
+            </div>
             <FilterPannel/>
             <IncidentsTable/>
-            <div className=''>
-                <PendingIncidents name="Call Center" value={contadorCallCenter}/>
-                <PendingIncidents name="SJD" value={contadorSJD}/>
-            </div>
         </div>
     );
 }

@@ -16,11 +16,6 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
     const updateIncidencias = (newArrayIncidencias: incidencia[]) => {
         setIncidencias(newArrayIncidencias);
-        // console.log(incidencias)
-    }
-
-    const handleNewIncidencia = (newIncidencia : incidencia): void => {
-        setIncidencias(prevIncidencias => [...prevIncidencias, newIncidencia])
     }
 
     return (
@@ -32,14 +27,11 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 updateUsuario,
                 updateUsuarioNick,
                 updateIncidencias,
-                handleNewIncidencia
             }}
         >
             {children}
         </AppContext.Provider>
     )
-
-
 }
 
 export default AppProvider

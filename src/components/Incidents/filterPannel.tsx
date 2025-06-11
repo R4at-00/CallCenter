@@ -1,5 +1,6 @@
 import * as React from "react"
 import DatePick from './datePick'
+import search from './../../img/search.svg'
 import { Input } from "@/components/ui/input"
 import {
     Select,
@@ -10,7 +11,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import type { AppContextType, incidencia } from "@/@types/app";
 import { AppContext } from "@/context/appContext";
 import { Button } from "../ui/button";
@@ -26,6 +27,11 @@ export default function FilterPannel() {
 
     const fetchIncidencias = async (): Promise<Array<incidencia>> => {
         return await fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+    }
+
+    async function filtrarIncidencias(): Promise<void> {
+        const nuevasInc = await fetchIncidencias()
+        updateIncidencias(filtrar(nuevasInc))
     }
 
     const filtrar = (arrayIncidencias: incidencia[]): incidencia[] => {
@@ -101,10 +107,7 @@ export default function FilterPannel() {
                     </SelectContent>
                 </Select>
             </label>
-            <Button onClick={async() => {
-                const nuevasInc = await fetchIncidencias()
-                updateIncidencias(filtrar(nuevasInc))
-            }}>Buscar</Button>
+            <Button className="bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black" onClick={filtrarIncidencias}><img className="h-4" src={search}/>Buscar</Button>
         </div>
     )
 }
