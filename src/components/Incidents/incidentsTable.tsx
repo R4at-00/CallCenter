@@ -1,4 +1,4 @@
-import type { AppContextType, incidencia } from "@/@types/app";
+import type { AppContextType, coord, incidencia } from "@/@types/app";
 import {
   Table,
   TableBody,
@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/table"
 import { AppContext } from "@/context/appContext";
 import { useContext, useEffect, useState } from "react";
+// import ReplyIncident from "./replyIncident";
 
 export default function IncidentsTable() {
-  const { updateIncidencias, incidencias } = useContext(AppContext) as AppContextType
+  const { updateIncidencias, incidencias, setReplyDialogActive, setReplyDialogId } = useContext(AppContext) as AppContextType
 
-  const [replyDialogActive, setReplyDialogActive] = useState<boolean>(false);
-  const [replyDialogId, setReplyDialogId] = useState<string>('');
+  // const [coords, setCoords] = useState<coord>({x: 0, y: 0});
   async function fetchIncidencias(): Promise<Array<incidencia>> {
     return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
   }
@@ -30,8 +30,7 @@ export default function IncidentsTable() {
   }
 
   return (
-    <>
-    
+    <div className="w-full flex flex-col">
       <Table className=''>
         <TableHeader className="border-b-1 border-gray-300">
           <TableRow className="">
@@ -47,8 +46,9 @@ export default function IncidentsTable() {
         <TableBody>
           {incidencias.map((registro) => (
             <TableRow key={registro.id} className="border-0 h-6" onClick={() => {
-              setReplyDialogActive(true)
               setReplyDialogId(registro.id)
+              setReplyDialogActive(true)
+              // setCoords({x: evt.clientX, y: evt.clientY})
             }}>
               <TableCell className="font-medium">{registro.id}</TableCell>
               <TableCell >{registro.NHC}</TableCell>
@@ -61,7 +61,7 @@ export default function IncidentsTable() {
           ))}
         </TableBody>
       </Table>
-      {replyDialogActive && <ReplyIncident incidencia={replyDialogId}/>}
-    </>
+      
+    </div>
   );
 }

@@ -11,9 +11,13 @@ export type AppContextType = {
 	usuario: Tuser;
 	usuarioNick: string;
 	incidencias: incidencia[];
+	replyDialogActive: boolean;
+	replyDialogId: string;
 	updateUsuario: (u: Tuser) => void;
 	updateUsuarioNick: (u: string) => void;
 	updateIncidencias: (u: incidencia[]) => void;
+	setReplyDialogActive: React.Dispatch<React.SetStateAction<boolean>>;
+	setReplyDialogId: React.Dispatch<React.SetStateAction<string>>
 };
 
 export type DatosUsuarioAD = {
@@ -41,10 +45,15 @@ export type incidencia = {
     Responsable: string;
     Prioridad: string;
     Clasificacion: string;
+	Respuesta: string;
 };
 
 export type nuevaIncidencia = Omit<incidencia, 'id'>;
 
+export type coord = {
+  x: number,
+  y: number
+}
 
 export type Tcentro = {
 	FACILITY: number;

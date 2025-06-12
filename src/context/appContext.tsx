@@ -7,6 +7,8 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [usuario, setUsuario] = useState<Tuser>(undefined);
     const [usuarioNick, setUsuarioNick] = useState<string>('');
     const [incidencias, setIncidencias] = useState<Array<incidencia>>([]);
+    const [replyDialogActive, setReplyDialogActive] = useState<boolean>(false);
+    const [replyDialogId, setReplyDialogId] = useState<string>('');
 
     const updateUsuario = (u: Tuser) => {
         setUsuario(u);
@@ -24,9 +26,13 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 usuario,
                 usuarioNick,
                 incidencias,
+                replyDialogActive,
+                replyDialogId,
                 updateUsuario,
                 updateUsuarioNick,
                 updateIncidencias,
+                setReplyDialogActive,
+                setReplyDialogId
             }}
         >
             {children}

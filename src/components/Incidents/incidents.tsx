@@ -6,9 +6,11 @@ import NewIncident from './newIncident';
 
 import { AppContext } from '@/context/appContext';
 import type { AppContextType } from '@/@types/app';
+import ReplyIncident from './replyIncident';
 
 export default function Incidents(){
-    const {usuario, incidencias} = useContext(AppContext) as AppContextType;
+    
+    const { incidencias, replyDialogActive } = useContext(AppContext) as AppContextType
     const [contadorCallCenter, setCCC] = useState(incidencias.filter(incidencia => incidencia.Estado === "C").length);
     const [contadorSJD, setContadorSJD] = useState(incidencias.filter(incidencia => incidencia.Estado === "H").length);
     
@@ -19,7 +21,8 @@ export default function Incidents(){
 
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
-            <div className='flex justify-between items-center w-full mb-5 border-0 border-gray-200 p-6 rounded-2xl shadow-xs hover:shadow-md transition-shadow'>
+            {replyDialogActive && <div className={`absolute w-full h-screen bg-[#b2b2b29a] self-center`}><ReplyIncident/></div>}
+            <div className='pt-10 flex justify-between items-center w-full mb-5 border-0 border-gray-200 p-6 rounded-2xl shadow-xs hover:shadow-md transition-shadow'>
                 {/* {usuario?.admin && <NewIncident/>} */}
                 <h1 className='text-2xl'>Call Center</h1>
                 <NewIncident/>
