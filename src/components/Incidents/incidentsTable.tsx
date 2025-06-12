@@ -44,19 +44,22 @@ export default function IncidentsTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {incidencias.map((registro) => (
-            <TableRow key={registro.id} className="border-0 h-6" onClick={() => {
-              setReplyDialogId(registro.id)
-              setReplyDialogActive(true)
-              // setCoords({x: evt.clientX, y: evt.clientY})
+          {incidencias.map((incidencia) => (
+            <TableRow key={incidencia.id} className="border-0 h-6" onClick={() => {
+              if(incidencia.Respuesta === null){
+                setReplyDialogId(incidencia.id)
+                setReplyDialogActive(true)
+              }else{
+                
+              }
             }}>
-              <TableCell className="font-medium">{registro.id}</TableCell>
-              <TableCell >{registro.NHC}</TableCell>
-              <TableCell>{formatDate(registro.Fecha)}</TableCell>
-              <TableCell className="text-left max-w-2xs overflow-x-hidden">{registro.Incidencia}</TableCell>
-              <TableCell className="text-center">{registro.Estado}</TableCell>
-              <TableCell className="text-left pl-6">{registro.Responsable}</TableCell>
-              <TableCell className="text-right">{registro.Prioridad}</TableCell>
+              <TableCell className="font-medium">{incidencia.id}</TableCell>
+              <TableCell >{incidencia.NHC}</TableCell>
+              <TableCell>{formatDate(incidencia.Fecha)}</TableCell>
+              <TableCell className="text-left max-w-2xs overflow-x-hidden">{incidencia.Incidencia}</TableCell>
+              <TableCell className="text-center">{incidencia.Estado}</TableCell>
+              <TableCell className="text-left pl-6">{incidencia.Responsable}</TableCell>
+              <TableCell className="text-right">{incidencia.Prioridad}</TableCell>
             </TableRow>
           ))}
         </TableBody>

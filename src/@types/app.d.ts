@@ -17,7 +17,7 @@ export type AppContextType = {
 	updateUsuarioNick: (u: string) => void;
 	updateIncidencias: (u: incidencia[]) => void;
 	setReplyDialogActive: React.Dispatch<React.SetStateAction<boolean>>;
-	setReplyDialogId: React.Dispatch<React.SetStateAction<string>>
+	setReplyDialogId: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type DatosUsuarioAD = {

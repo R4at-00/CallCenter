@@ -21,7 +21,7 @@ export default function Incidents(){
 
     return (
         <div className='flex w-fit flex-col items-start gap-3.5'>
-            {replyDialogActive && <div className={`absolute w-full h-screen bg-[#b2b2b29a] self-center`}><ReplyIncident/></div>}
+            {replyDialogActive && <div className={`absolute w-full h-screen bg-[#b2b2b29a] self-center z-10`}><ReplyIncident/></div>}
             <div className='pt-10 flex justify-between items-center w-full mb-5 border-0 border-gray-200 p-6 rounded-2xl shadow-xs hover:shadow-md transition-shadow'>
                 {/* {usuario?.admin && <NewIncident/>} */}
                 <h1 className='text-2xl'>Call Center</h1>
