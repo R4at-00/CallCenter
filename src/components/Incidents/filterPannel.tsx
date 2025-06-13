@@ -11,20 +11,31 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { AppContextType, incidencia } from "@/@types/app";
 import { AppContext } from "@/context/appContext";
 import { Button } from "../ui/button";
 
 export default function FilterPannel() {
-
+    function obtenerFechaHoraActual(): string {
+        const ahora = new Date();
+        const dia = String(ahora.getDate()).padStart(2, '0');
+        const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+        const anio = ahora.getFullYear();
+        return `${anio}-${mes}-${dia}`;
+    }
     const { updateIncidencias } = useContext(AppContext) as AppContextType;
     const [NHC, setNHC] = useState<string>('');
     const [estado, setEstado] = useState<string>('all');
     const [responsable, setResponsable] = useState<string>('all');
-    const [desdeFecha, setDesdeFecha] = useState<Date>();
-    const [hastaFecha, setHastaFecha] = useState<Date>();
+    const [desdeFecha, setDesdeFecha] = useState<Date>(new Date(obtenerFechaHoraActual()));
+    const [hastaFecha, setHastaFecha] = useState<Date>(new Date(obtenerFechaHoraActual()));
 
+    useEffect(() => {
+        filtrarIncidencias();
+        const controller = new AbortController()
+        return () => { controller.abort() }
+    }, []);
     const fetchIncidencias = async (): Promise<Array<incidencia>> => {
         return await fetch('http://localhost:3000/api/incidencias').then(res => res.json());
     }
@@ -66,10 +77,13 @@ export default function FilterPannel() {
                         <SelectValue placeholder="Estado" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem defaultChecked value="all">Todas</SelectItem>
-                        <SelectItem value="C">Pendiente procesar por Call Center</SelectItem>
-                        <SelectItem value="H">Pendiente procesar por SJD</SelectItem>
-                        <SelectItem value="R">Resueltas</SelectItem>
+                        <SelectGroup>
+                            <SelectLabel>Estado</SelectLabel>
+                            <SelectItem defaultChecked value="all">Todas</SelectItem>
+                            <SelectItem value="C">Pendiente procesar por Call Center</SelectItem>
+                            <SelectItem value="H">Pendiente procesar por SJD</SelectItem>
+                            <SelectItem value="R">Resueltas</SelectItem>
+                        </SelectGroup>
                     </SelectContent>
                 </Select>
             </label>
@@ -107,7 +121,7 @@ export default function FilterPannel() {
                     </SelectContent>
                 </Select>
             </label>
-            <Button className="bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black" onClick={filtrarIncidencias}><img className="h-4" src={search}/>Buscar</Button>
+            <Button className="bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black" onClick={filtrarIncidencias}><img className="h-4" src={search} />Buscar</Button>
         </div>
     )
 }

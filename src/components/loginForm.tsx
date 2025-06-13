@@ -100,13 +100,13 @@ export const LoginForm = (props: IfLoginForm) => {
         }
     }
     return (
-        <div className="flex flex-col text-gray-700 border-0 border-gray-200 rounded-md p-9 w-fit gap-4 shadow-lg hover:shadow-xl transition-shadow   ">
+        <form className="flex flex-col text-gray-700 border-0 border-gray-200 rounded-md p-9 w-fit gap-4 shadow-lg hover:shadow-xl transition-shadow   ">
             <h1 className="text-2xl m-4 mt-0 mb-1 pb-4 border-b-2">Call Center</h1>
             <Input className="w-100 m-3 mt-1 mb-0.5" placeholder="Usuario" name="Usuario" value={usuario} onChange={handleChangeNombreUsuario} />
             <Input type="password" className="w-100 m-3 mt-0.5" placeholder="Password" name="Password" value={password} onChange={handleChangePassword} />
-            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end p-5 m-3 mt-0.5 mb-1 bg-[#7cc5db9f] hover:bg-[#8cd1e5]" variant="outline">Acceder</Button>
+            <Button disabled={validating} onClick={ValidaUsuario} className="w-fit self-end p-5 m-3 mt-0.5 mb-1 bg-[#8bd9f0] hover:bg-[#8ed4e9]" variant="outline">Acceder</Button>
             {errorVisible && <div className="m-4 mt-1 mb-1">{mensajeError}</div>}
-        </div>
+        </form>
     );
 }
 

@@ -32,7 +32,7 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 updateUsuarioNick,
                 updateIncidencias,
                 setReplyDialogActive,
-                setReplyDialogId
+                setReplyDialogId,
             }}
         >
             {children}

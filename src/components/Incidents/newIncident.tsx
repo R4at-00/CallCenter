@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import plus from './../../img/plus.svg'
 import { Button } from "@/components/ui/button"
 import {
@@ -21,26 +21,25 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Textarea } from "@/components/ui/textarea"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 import type { AppContextType, incidencia } from '@/@types/app';
 import { AppContext } from '@/context/appContext';
 import useNewIncidentForm from '@/hooks/useNewIncidentForm';
 import { DialogDescription } from '@radix-ui/react-dialog';
 
 export default function NewIncident() {
-    const [isAsignarNHCActive, setIsAsignarNHCActive] = useState(false);
-    const { usuarioNick, incidencias, updateIncidencias } = useContext(AppContext) as AppContextType
-    // const generarEncabezadoIncidencia = 
+    const [isAsignarNHCDisabled, setIsAsignarNHCDisabled] = useState(true);
+    const { updateIncidencias } = useContext(AppContext) as AppContextType
     const [inputValues, dispatch] = useNewIncidentForm();
 
     return (
         <Dialog>
             <form>
                 <DialogTrigger className='p-4 text-s' asChild>
-                    <Button className='gap-1 p-3 h-10 bg-[#8bd9f0] hover:bg-[#8ed4e9]' variant="outline" onClick={() => {
-                        setIsAsignarNHCActive(false);
-                    }}>{<img className='h-6' src={plus} />}Agregar</Button>
+                    <Button className='gap-1 p-3 h-10 bg-[#8bd9f0] hover:bg-[#8ed4e9]' variant="outline">
+                        {<img className='h-6' src={plus} />}Agregar
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[800px] p-8">
                     <DialogHeader>
@@ -165,11 +164,9 @@ export default function NewIncident() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-
                                         <SelectLabel>Prioridad</SelectLabel>
                                         <SelectItem defaultChecked value="Normal">Normal</SelectItem>
                                         <SelectItem value="Urgente">Urgente</SelectItem>
-
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -177,14 +174,14 @@ export default function NewIncident() {
                     </div>
                     <div className='w-full flex flex-col gap-4'>
                         <div id="paciente-NHC" className='flex flex-col gap-4  border-1 border-gray-200 rounded-2xl p-4'>
-                            <RadioGroup className='flex gap-6' defaultValue="paciente-con-NHC">
+                            <RadioGroup className='flex gap-6' defaultValue="paciente-sin-NHC">
                                 <div className="flex gap-2 items-center">
                                     <Label className='m-0' htmlFor="paciente-sin-NHC">Paciente sin número de historia</Label>
-                                    <RadioGroupItem onClick={() => setIsAsignarNHCActive(true)} value="paciente-sin-NHC" id="paciente-sin-NHC" />
+                                    <RadioGroupItem onClick={() => setIsAsignarNHCDisabled(true)} value="paciente-sin-NHC" id="paciente-sin-NHC" />
                                 </div>
                                 <div className="flex gap-2 items-center space-x-2">
                                     <Label className='m-0' htmlFor="paciente-con-NHC">Paciente con número de historia</Label>
-                                    <RadioGroupItem onClick={() => setIsAsignarNHCActive(false)} value="paciente-con-NHC" id="paciente-con-NHC" />
+                                    <RadioGroupItem onClick={() => setIsAsignarNHCDisabled(false)} value="paciente-con-NHC" id="paciente-con-NHC" />
                                 </div>
                             </RadioGroup>
                             <Input value={inputValues.NHC} name="NHC" onChange={(evt) => {
@@ -192,7 +189,7 @@ export default function NewIncident() {
                                     type: "change_value",
                                     payload: { inputName: "NHC", inputValue: evt.target.value }
                                 })
-                            }} required maxLength={6} pattern='[0-9]*' disabled={isAsignarNHCActive} id="asignar-NHC" placeholder='NHC' className='w-fit' />
+                            }} required maxLength={6} pattern='[0-9]*' disabled={isAsignarNHCDisabled} id="asignar-NHC" placeholder='NHC' className='w-fit' />
                         </div>
                         <Textarea value={inputValues.Incidencia} name="Incidencia" onChange={(evt) => {
                             dispatch({
@@ -204,31 +201,36 @@ export default function NewIncident() {
                 </div>
                 <DialogFooter>
                     <DialogClose asChild>
-                        <Button variant="outline">Cancel</Button>
+                        <Button onClick={() => setIsAsignarNHCDisabled(true)} variant="outline">Cancel</Button>
                     </DialogClose>
                     <Button className='bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black' onClick={async (event) => {
-                        event.preventDefault();
-                        try {
-                            // const newIncidenciaCompleta: incidencia = { ...inputValues, id: (incidencias.length + 1).toString() };
-                            console.log(JSON.stringify(inputValues));
-                            const resp = await fetch("http://localhost:3000/api/incidencias", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify(inputValues),
-                            });
-                            await resp.json();
-                            dispatch({ type: "clear" });
-                        } catch (err) {
-                            console.error(err);
+                        if((!isAsignarNHCDisabled && inputValues.NHC !== "") || (isAsignarNHCDisabled && inputValues.NHC === "")){
+                            event.preventDefault();
+                            try {
+                                // const newIncidenciaCompleta: incidencia = { ...inputValues, id: (incidencias.length + 1).toString() };
+                                console.log(JSON.stringify(inputValues));
+                                const resp = await fetch("http://localhost:3000/api/incidencias", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(inputValues),
+                                });
+                                await resp.json();
+                                dispatch({ type: "clear" });
+                            } catch (err) {
+                                console.error(err);
+                                alert('Por favor, cumplimente todos los campos.')
+                            }
+    
+                            async function fetchIncidencias(): Promise<Array<incidencia>> {
+                                return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+                            }
+                            fetchIncidencias()
+                                .then(updateIncidencias)
+                            const controller = new AbortController()
+                            return () => { controller.abort() }
+                        }else{
+                            alert('Por favor, cumplimente todos los campos.')
                         }
-
-                        async function fetchIncidencias(): Promise<Array<incidencia>> {
-                            return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
-                        }
-                        fetchIncidencias()
-                            .then(updateIncidencias)
-                        const controller = new AbortController()
-                        return () => { controller.abort() }
 
                     }} type="submit" >Guardar</Button>
                 </DialogFooter>

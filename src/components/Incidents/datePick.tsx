@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
@@ -12,13 +12,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { AppContextType, incidencia } from "@/@types/app";
-import { AppContext } from "@/context/appContext";
 
 interface DatePickProps {
   name: string,
   fecha: Date,
-  setFecha: React.Dispatch<React.SetStateAction<Date |undefined>>
+  setFecha: React.Dispatch<React.SetStateAction<Date>>
 }
 
 export default function DatePick(props: DatePickProps) {
@@ -41,10 +39,10 @@ export default function DatePick(props: DatePickProps) {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
+          <Calendar title="Desde fecha"
             mode="single"
             selected={props.fecha}
-            onSelect={props.setFecha}
+            onSelect={() => props.setFecha}
             initialFocus
           />
         </PopoverContent>
