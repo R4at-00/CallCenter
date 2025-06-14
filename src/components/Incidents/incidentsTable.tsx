@@ -8,26 +8,35 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { AppContext } from "@/context/appContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // import ReplyIncident from "./replyIncident";
 
 export default function IncidentsTable() {
-  const { incidencias, setReplyDialogActive, setReplyDialogId } = useContext(AppContext) as AppContextType
+  const { updateIncidencias, incidencias, setReplyDialogActive, setReplyDialogId } = useContext(AppContext) as AppContextType
 
-
+  // async function fetchIncidencias(): Promise<Array<incidencia>> {
+  //   return fetch('http://localhost:3000/api/incidencias').then(res => res.json());
+  // }
+  // useEffect(() => {
+    
+  //   fetchIncidencias()
+  //     .then(updateIncidencias)
+  //   const controller = new AbortController()
+  //   return () => { controller.abort() }
+  // }, []);
   const formatDate = (fecha: string) => {
     return fecha.split('T')[0];
   }
 
   const formatIncident = (incidencia: incidencia) => {
-    if(incidencia.Estado === 'R'){
+    if (incidencia.Estado === 'R') {
       return "via-[#04f604]"
-    }else{
-      if(incidencia.Prioridad === 'Urgente'){
+    } else {
+      if (incidencia.Prioridad === 'Urgente') {
         return "via-[#f08782]"
-      }else if(incidencia.Prioridad === 'Normal'){
+      } else if (incidencia.Prioridad === 'Normal') {
         return "via-[#fbf504]"
-      } 
+      }
     }
   }
 
@@ -62,7 +71,7 @@ export default function IncidentsTable() {
           ))}
         </TableBody>
       </Table>
-      
+
     </div>
   );
 }

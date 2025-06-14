@@ -42,7 +42,7 @@ export default function DatePick(props: DatePickProps) {
           <Calendar title="Desde fecha"
             mode="single"
             selected={props.fecha}
-            onSelect={() => props.setFecha}
+            onSelect={(evt) => props.setFecha(evt as Date)}
             initialFocus
           />
         </PopoverContent>

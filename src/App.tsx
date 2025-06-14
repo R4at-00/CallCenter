@@ -14,9 +14,9 @@ function App() {
   return (
     <AppProvider>
       <div className=''>
-        {!loginOk && <div className='h-screen flex flex-col justify-center items-center'><LoginForm  handleClose={handleClose} /> </div>}
-        {loginOk && <div className='h-screen flex flex-col justify-start items-center'><Incidents/></div>}
-        {/* <div className='h-screen flex flex-col justify-start items-center'><Incidents /></div> */}
+        {/* {!loginOk && <div className='h-screen flex flex-col justify-center items-center'><LoginForm  handleClose={handleClose} /> </div>}
+        {loginOk && <div className='h-screen flex flex-col justify-start items-center'><Incidents/></div>} */}
+        <div className='h-screen flex flex-col justify-start items-center'><Incidents /></div>
       </div>
     </AppProvider>
   )

@@ -35,7 +35,7 @@ export default function FilterPannel() {
         filtrarIncidencias();
         const controller = new AbortController()
         return () => { controller.abort() }
-    }, []);
+    }, [updateIncidencias]);
     const fetchIncidencias = async (): Promise<Array<incidencia>> => {
         return await fetch('http://localhost:3000/api/incidencias').then(res => res.json());
     }
@@ -121,7 +121,7 @@ export default function FilterPannel() {
                     </SelectContent>
                 </Select>
             </label>
-            <Button className="bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black" onClick={filtrarIncidencias}><img className="h-4" src={search} />Buscar</Button>
+            {/* <Button className="bg-[#8bd9f0] hover:bg-[#8ed4e9] text-black" onClick={filtrarIncidencias}><img className="h-4" src={search} />Buscar</Button> */}
         </div>
     )
 }
