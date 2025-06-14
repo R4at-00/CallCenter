@@ -24,8 +24,8 @@ export default function Incidents(){
             {replyDialogActive && <div className={`absolute w-full h-screen bg-[#00000060] self-center z-10`}><ReplyIncident/></div>}
             <div className='pt-10 flex justify-between items-center w-full mb-5 border-0 border-gray-200 p-6 rounded-2xl shadow-xs hover:shadow-md transition-shadow'>
                 <h1 className='text-2xl'>Call Center</h1>
-                {/* {usuario?.admin && <NewIncident/>} */}
-                <NewIncident/>
+                {usuario?.admin && <NewIncident/>}
+                {/* <NewIncident/> */}
             </div>
             <div className='border-0 p-5 border-gray-100 rounded-xl mb-4 shadow-xs hover:shadow-md transition-shadow'>
                 <h1 className='border-b-1 border-gray-200 pb-1 mb-2'>Incidencias pendientes</h1>
