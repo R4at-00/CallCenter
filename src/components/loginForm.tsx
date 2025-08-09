@@ -109,7 +109,3 @@ export const LoginForm = (props: IfLoginForm) => {
         </form>
     );
 }
-
-//  c07-consul
-//  consul2024
-//  https://192.168.7.249:26025/api/v0/config/centros
